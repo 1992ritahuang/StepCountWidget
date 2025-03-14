@@ -10,7 +10,7 @@ import Combine
 
 class StepCountViewModel: ObservableObject {
     @Published var stepCount = 0
-    private var healthKitManager = HealthKitManager()
+    var healthKitManager = HealthKitManager()
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -20,5 +20,11 @@ class StepCountViewModel: ObservableObject {
                 self.stepCount = newValue
             }
             .store(in: &cancellables)  //for memory leak
+    }
+    
+    func getDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d"
+        return formatter.string(from: Date())
     }
 }

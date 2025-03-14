@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = StepCountViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("\(viewModel.getDate())")
+                .font(.title)
+            Text("\(viewModel.stepCount) 步")
+                .font(.largeTitle)
+                .bold()
+            Button("update") {
+                viewModel.healthKitManager.fetchStepCount()
+            }
         }
         .padding()
     }
