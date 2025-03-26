@@ -8,11 +8,11 @@
 import UIKit
 import HealthKit
 
-class HealthKitManager: ObservableObject {
+public class HealthKitManager: ObservableObject {
     private let healthStore = HKHealthStore()
     @Published var stepCount = 0
     
-    init() {
+    public init() {
         requestAuthorization()
     }
 
@@ -29,7 +29,7 @@ class HealthKitManager: ObservableObject {
         }
     }
     
-    func fetchStepCount() {
+    public func fetchStepCount() {
         guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else { return }
         let startOfDay = Calendar.current.startOfDay(for: Date())
         
